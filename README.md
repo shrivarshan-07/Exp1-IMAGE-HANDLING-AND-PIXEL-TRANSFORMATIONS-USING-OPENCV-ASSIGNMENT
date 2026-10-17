@@ -127,103 +127,100 @@ plt.show()
 #### 2.2 Draw a Circle
 
 ```python
-# Draw a circle at the center of the image
-circle_img = cv2.circle(
-    img_rgb.copy(),
-    (width // 2, height // 2),
-    150,
-    (255, 0, 0),
-    10
-)
+# Load the image
+image = cv2.imread('varshan.jpeg') 
+
+# Convert BGR (OpenCV's default) to RGB (Matplotlib's expected color order)
+img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+img_rgb.shape
+
+circle_img = cv2.circle(img_rgb,(400,300),150,(255,0,0),10) # cv2.circle(image, center, radius, color, thickness)
 
 # Display the image
-plt.imshow(circle_img)
+plt.imshow(circle_img, cmap='viridis')  
 plt.title("Image with Circle")
-plt.axis('off')
+plt.axis('off')  
 plt.show()
 ```
 
 #### 2.3 Draw a Rectangle
 
 ```python
-# Draw a rectangle around the whole image
-rectangle_img = cv2.rectangle(
-    img_rgb.copy(),
-    (0, 0),
-    (width - 1, height - 1),
-    (0, 0, 255),
-    10
-)
+# Load the image
+image = cv2.imread('Qno. 1.jpg') 
+
+# Convert BGR (OpenCV's default) to RGB (Matplotlib's expected color order)
+img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+img.shape
+
+# Draw a rectangle around the Whole image
+rectangle_img = cv2.rectangle(img_rgb, (0, 0), (768, 600), (0, 0, 255), 10)  # cv2.rectangle(image, start_point, end_point, color, thickness)
 
 # Display the image
-plt.imshow(rectangle_img)
+plt.imshow(rectangle_img, cmap='viridis')  
 plt.title("Image with Rectangle")
-plt.axis('off')
+plt.axis('off')  
 plt.show()
 ```
 
 #### 2.4 Add Text to the Image
 
 ```python
+# Load the image
+image = cv2.imread('Qno. 1.jpg') 
+
+# Convert BGR (OpenCV's default) to RGB (Matplotlib's expected color order)
+img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
 # Add text to the image
-text_img = cv2.putText(
-    img_rgb.copy(),
-    "OpenCV Drawing",
-    (10, 30),
-    cv2.FONT_HERSHEY_SIMPLEX,
-    1,
-    (255, 255, 255),
-    10
-)
+text_img = cv2.putText(img_rgb, "OpenCV Drawing", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 10)  ## cv2.putText(image, text, position, font, font_scale, color, thickness)
+
 
 # Display the image
-plt.imshow(text_img)
+plt.imshow(text_img, cmap='viridis')  
 plt.title("Image with Text")
-plt.axis('off')
+plt.axis('off')  
 plt.show()
 ```
 
 ### Step 3: Color Space Conversion
 
 ```python
-# Read the image
-image = cv2.imread('varshan.jpeg')
+# Load the image
+image = cv2.imread('varshan.jpeg') 
 
-if image is None:
-    raise FileNotFoundError("varshan.jpeg not found")
-
-# Convert BGR to RGB
 image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
-# Display the original RGB image
+# Original RGB Image
 plt.imshow(image_rgb)
 plt.title("Original RGB Image")
 plt.axis("off")
-plt.show()
 
 # Convert RGB to HSV
 image_hsv = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2HSV)
 
-plt.imshow(cv2.cvtColor(image_hsv, cv2.COLOR_HSV2RGB))
+# HSV Image
+plt.imshow(image_hsv)
 plt.title("HSV Image")
 plt.axis("off")
-plt.show()
 
-# Convert RGB to grayscale
+# Convert RGB to GRAY
 image_gray = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2GRAY)
 
+# Grayscale Image
 plt.imshow(image_gray, cmap='gray')
 plt.title("Grayscale Image")
 plt.axis("off")
-plt.show()
 
 # Convert RGB to YCrCb
 image_ycrcb = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2YCrCb)
 
-plt.imshow(cv2.cvtColor(image_ycrcb, cv2.COLOR_YCrCb2RGB))
+# YCrCb Image
+plt.imshow(image_ycrcb)
 plt.title("YCrCb Image")
 plt.axis("off")
-plt.show()
 
 # Convert HSV back to RGB
 image_hsv_to_rgb = cv2.cvtColor(image_hsv, cv2.COLOR_HSV2RGB)
@@ -231,7 +228,6 @@ image_hsv_to_rgb = cv2.cvtColor(image_hsv, cv2.COLOR_HSV2RGB)
 plt.imshow(image_hsv_to_rgb)
 plt.title("HSV to RGB Image")
 plt.axis("off")
-plt.show()
 ```
 
 ### Step 4: Pixel Manipulation
