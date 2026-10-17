@@ -92,16 +92,13 @@ import matplotlib.pyplot as plt
 # Read the image using OpenCV
 img = cv2.imread('varshan.jpeg', cv2.IMREAD_COLOR)
 
-if img is None:
-    raise FileNotFoundError("varshan.jpeg not found")
-
-# Convert BGR to RGB
+# Convert BGR (OpenCV's default) to RGB (Matplotlib's expected color order)
 img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-# Display the original image
-plt.imshow(img_rgb)
+# Display the image using Matplotlib
+plt.imshow(img_rgb, cmap='viridis')  # You can change 'viridis' to another cmap or use None for RGB images
 plt.title("Original Image")
-plt.axis('off')
+plt.axis('off')  # Removes axis ticks and labels
 plt.show()
 ```
 
@@ -111,29 +108,19 @@ plt.show()
 
 ```python
 # Load the image
-image = cv2.imread('Qno. 1.jpg')
+image = cv2.imread('varshan.jpeg') 
 
-if image is None:
-    raise FileNotFoundError("Qno. 1.jpg not found")
-
-# Convert BGR to RGB
-img_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-
-height, width = img_rgb.shape[:2]
+# Convert BGR (OpenCV's default) to RGB (Matplotlib's expected color order)
+img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+img_rgb.shape
 
 # Draw a line from top-left to bottom-right
-line_img = cv2.line(
-    img_rgb.copy(),
-    (0, 0),
-    (width - 1, height - 1),
-    (255, 0, 0),
-    2
-)
+line_img = cv2.line(img_rgb, (0, 0), (768, 600), (255, 0, 0), 2) # cv2.line(image, start_point, end_point, color, thickness)
 
 # Display the image
-plt.imshow(line_img)
+plt.imshow(line_img, cmap='viridis')  
 plt.title("Image with Line")
-plt.axis('off')
+plt.axis('off')  
 plt.show()
 ```
 
