@@ -399,6 +399,7 @@ else:
 
 #1. Original image displayed using OpenCV and Matplotlib.
 
+
 <img width="678" height="432" alt="image" src="https://github.com/user-attachments/assets/3c9e1b80-5327-4524-bf3e-ea608081b473" />
 
 
