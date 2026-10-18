@@ -233,32 +233,15 @@ plt.axis("off")
 ### Step 4: Pixel Manipulation
 
 ```python
-# Read the image
-image = cv2.imread('varshan.jpeg')
+# Modify a block of pixels (300x300) to white, starting from (200, 200)
+image[200:500, 200:500] = [255, 255, 255]  # Rows: 200-499, Columns: 200-499
 
-if image is None:
-    raise FileNotFoundError("varshan.jpeg not found")
-
-height, width = image.shape[:2]
-
-# Access and print the pixel value at (100, 100)
-if height > 100 and width > 100:
-    pixel_value = image[100, 100]
-    print("Pixel value at (100, 100):", pixel_value)
-
-# Modify the pixel at (200, 200) to white
-if height > 200 and width > 200:
-    image[200, 200] = [255, 255, 255]
-
-# Modify a 300x300 block starting at (200, 200)
-image[200:min(500, height), 200:min(500, width)] = [255, 255, 255]
-
-# Convert BGR to RGB
+# Convert BGR to RGB for displaying with Matplotlib
 image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 # Display the modified image
 plt.imshow(image_rgb)
-plt.title("Image with White Block")
+plt.title("Image with 300x300 White Block")
 plt.axis("off")
 plt.show()
 ```
@@ -266,30 +249,16 @@ plt.show()
 ### Step 5: Image Resizing
 
 ```python
-# Read the original image
-image = cv2.imread('varshan.jpeg')
+image = cv2.imread('varshan.jpeg') 
+image.shape
 
-if image is None:
-    raise FileNotFoundError("varshan.jpeg not found")
+# Resize the image to half its size
+resized_image = cv2.resize(image, (768 // 2, 600 // 2))  # (new_width, new_height)
 
-# Get the original dimensions
-height, width = image.shape[:2]
+# Convert BGR to RGB for displaying with Matplotlib
+resized_image_rgb = cv2.cvtColor(resized_image, cv2.COLOR_BGR2RGB)
 
-print("Original dimensions:", image.shape)
-
-# Resize the image to half its original dimensions
-resized_image = cv2.resize(
-    image,
-    (width // 2, height // 2)
-)
-
-# Convert BGR to RGB
-resized_image_rgb = cv2.cvtColor(
-    resized_image,
-    cv2.COLOR_BGR2RGB
-)
-
-print("Resized dimensions:", resized_image.shape)
+resized_image_rgb.shape
 
 # Display the resized image
 plt.imshow(resized_image_rgb)
@@ -301,19 +270,18 @@ plt.show()
 ### Step 6: Image Cropping
 
 ```python
-# Read the original image
+# Load the image
 image = cv2.imread('varshan.jpeg')
 
-if image is None:
-    raise FileNotFoundError("varshan.jpeg not found")
+image.shape
 
-# Crop a 300x300 region starting at (50, 50)
-roi = image[50:350, 50:350]
+# Crop a 300x300 region starting from (50, 50)
+roi = image[50:350, 50:350]  # Rows: 50-349, Columns: 50-349
 
-# Convert BGR to RGB
+# Convert BGR to RGB for displaying with Matplotlib
 roi_rgb = cv2.cvtColor(roi, cv2.COLOR_BGR2RGB)
 
-# Display the cropped region
+# Display the cropped region (ROI)
 plt.imshow(roi_rgb)
 plt.title("Cropped Region of Interest (ROI)")
 plt.axis("off")
@@ -323,55 +291,30 @@ plt.show()
 ### Step 7: Image Flipping
 
 ```python
-# Read the original image
+# Load the image
 image = cv2.imread('varshan.jpeg')
 
-if image is None:
-    raise FileNotFoundError("varshan.jpeg not found")
-
-# Flip horizontally
+# Flip the image horizontally (left-right)
 flipped_horizontally = cv2.flip(image, 1)
 
-# Convert BGR to RGB
-flipped_horizontally_rgb = cv2.cvtColor(
-    flipped_horizontally,
-    cv2.COLOR_BGR2RGB
-)
+# Convert BGR to RGB for displaying with Matplotlib
+flipped_horizontally_rgb = cv2.cvtColor(flipped_horizontally, cv2.COLOR_BGR2RGB)
 
-# Display the horizontally flipped image
+# Horizontal flip
 plt.imshow(flipped_horizontally_rgb)
 plt.title("Flipped Horizontally")
 plt.axis("off")
-plt.show()
 
-# Flip vertically
+# Flip the image vertically (up-down)
 flipped_vertically = cv2.flip(image, 0)
 
-# Convert BGR to RGB
-flipped_vertically_rgb = cv2.cvtColor(
-    flipped_vertically,
-    cv2.COLOR_BGR2RGB
-)
+# Convert BGR to RGB for displaying with Matplotlib
+flipped_vertically_rgb = cv2.cvtColor(flipped_vertically, cv2.COLOR_BGR2RGB)
 
-# Display the vertically flipped image
+# Vertical flip
 plt.imshow(flipped_vertically_rgb)
 plt.title("Flipped Vertically")
 plt.axis("off")
-plt.show()
-```
-
-### Step 8: Save the Final Modified Image
-
-```python
-# Save the final modified image
-output_file = 'final_modified_image.jpg'
-
-success = cv2.imwrite(output_file, image)
-
-if success:
-    print("Image saved successfully as", output_file)
-else:
-    print("Failed to save the image")
 ```
 
 ---
